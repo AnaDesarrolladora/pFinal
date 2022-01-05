@@ -1,0 +1,18 @@
+<div *ngIf="logged">
+    <mat-grid-list cols="1" rowHeight="6:1">
+        <mat-grid-tile class="alturaMin">
+            <table>
+                <tr>
+                    <mat-icon>pets</mat-icon>
+                </tr>
+                <tr>
+                    <mat-button-toggle-group>
+                        <mat-button-toggle (click)="verListadoMascotas()">Listado de mascotas</mat-button-toggle>
+                        <mat-button-toggle *ngIf="usuarioLogado?.rol === 2" (click)="verHistoricoVentas()">Ver histórico de ventas</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </tr>
+            </table>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<router-outlet></router-outlet>

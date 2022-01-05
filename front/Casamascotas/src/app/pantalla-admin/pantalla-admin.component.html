@@ -1,0 +1,31 @@
+<div *ngIf="logged">
+    <mat-grid-list cols="2" rowHeight="6:1">
+        <mat-grid-tile class="alturaMin">
+            <table>
+                <tr>                    
+                    <mat-icon>account_box</mat-icon>
+                </tr>
+                <tr>
+                    <mat-button-toggle-group>
+                        <mat-button-toggle (click)="altaUsuario()">Añadir usuario</mat-button-toggle>
+                        <mat-button-toggle (click)="verListadoUsuarios()">Listado de usuarios</mat-button-toggle>
+                    </mat-button-toggle-group>          
+                </tr>     
+            </table>
+        </mat-grid-tile>
+        <mat-grid-tile class="alturaMin">
+            <table>
+                <tr>
+                    <mat-icon>pets</mat-icon>
+                </tr>
+                <tr>
+                    <mat-button-toggle-group>
+                        <mat-button-toggle (click)="altaMascota()">Añadir mascota</mat-button-toggle>
+                        <mat-button-toggle (click)="verListadoMascotas()">Listado de mascotas</mat-button-toggle>
+                    </mat-button-toggle-group>          
+                </tr>               
+            </table>
+        </mat-grid-tile>
+    </mat-grid-list>    
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    flex-flow: row-reverse;
+    background-color: antiquewhite;
+}
+
+.headerNoLogado {
+    margin-bottom: 2rem;
+}
+
+.titleApp {
+    font-family: fantasy;
+    color: lightsalmon;
+}

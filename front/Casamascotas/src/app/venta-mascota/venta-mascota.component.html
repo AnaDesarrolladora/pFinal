@@ -1,0 +1,154 @@
+<div class="centrado">
+    <h2>Venta de {{mascotaVenta?.nombre}} ({{ mascotaVenta?.tipo }})</h2>
+    <!-- Proceso de venta, paso 1: buscar al comprador, por si ya estuviera registrado -->
+    <div class="centrado" *ngIf="!darAltaComprador && !compradorYaRegistrado">
+        <form class="formBusqueda" [formGroup]="dniCompradorFormulario" (submit)="buscarComprador()">
+            <table>
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <mat-label>DNI (Documento Nacional de Identidad)</mat-label>
+                            <input matInput type="text" id="dni" formControlName="dni">
+                            <mat-error *ngIf="dniCompradorFormulario?.get('dni')?.hasError('required')">
+                                DNI <strong>requerido</strong>
+                            </mat-error>
+                            <mat-error *ngIf="dniCompradorFormulario?.get('dni')?.hasError('pattern')">
+                                El DNI debe tener <strong>8 cifras y una letra</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <div>
+                <button mat-button color="accent" (click)="limpiarFormulario()">Limpiar</button>
+                <button mat-raised-button color="primary">Buscar</button>
+            </div>    
+        </form>
+    </div>
+    <!-- Proceso de venta, paso 2: en el caso de que el comprador no esté registrado, darlo de alta -->
+    <div class="centrado" *ngIf="darAltaComprador && !compradorYaRegistrado">
+        <form class="formAlta" [formGroup]="compradorNuevoFormulario" (submit)="guardarComprador()">
+            <table>
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <mat-label>DNI (Documento Nacional de Identidad)</mat-label>
+                            <input matInput type="text" id="dni" formControlName="dni">
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('dni')?.hasError('required')">
+                                DNI <strong>requerido</strong>
+                            </mat-error>
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('dni')?.hasError('pattern')">
+                                El DNI debe tener <strong>8 cifras y una letra</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                &nbsp;
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <mat-label>Nombre</mat-label>
+                            <input matInput type="text" id="nombre" formControlName="nombre">
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('nombre')?.hasError('required')">
+                                Nombre <strong>requerido</strong>
+                            </mat-error>
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('nombre')?.hasError('pattern')">
+                                El nombre debe tener <strong>entre 1 y 255 caracteres</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                &nbsp;      
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <mat-label>Apellidos</mat-label> 
+                            <input matInput type="text" id="apellidos" formControlName="apellidos">
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('apellidos')?.hasError('required')">
+                                Apellidos <strong>requeridos</strong>
+                            </mat-error>
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('apellidos')?.hasError('pattern')">
+                                Los apellidos deben tener <strong>entre 1 y 255 caracteres</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                &nbsp;
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <mat-label>Dirección</mat-label> 
+                            <input matInput type="text" id="direccion" formControlName="direccion">
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('direccion')?.hasError('required')">
+                                Dirección <strong>requerida</strong>
+                            </mat-error>
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('direccion')?.hasError('pattern')">
+                                La dirección debe tener <strong>entre 1 y 255 caracteres</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                &nbsp;
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <mat-label>Localidad</mat-label> 
+                            <input matInput type="text" id="localidad" formControlName="localidad">
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('localidad')?.hasError('required')">
+                                Localidad <strong>requerida</strong>
+                            </mat-error>
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('localidad')?.hasError('pattern')">
+                                La localidad debe tener <strong>entre 1 y 255 caracteres</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                &nbsp;
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <mat-label>E-mail</mat-label> 
+                            <input matInput type="text" id="email" formControlName="email">
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('email')?.hasError('required')">
+                                E-mail <strong>requerido</strong>
+                            </mat-error>
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('email')?.hasError('pattern')">
+                                El e-mail debe cumplir <strong>[correo]@[empresa].[dominio]</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                &nbsp;
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput type="text" id="telefono" formControlName="telefono">
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('telefono')?.hasError('required')">
+                                Teléfono <strong>requerido</strong>
+                            </mat-error>
+                            <mat-error *ngIf="compradorNuevoFormulario?.get('telefono')?.hasError('pattern')">
+                                El teléfono debe tener <strong>9 dígitos</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                &nbsp;
+            </table>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <div>
+                <button mat-button color="accent" (click)="limpiarFormulario()">Limpiar</button>
+                <button mat-raised-button color="primary">Guardar</button>
+            </div> 
+        </form>
+    </div>
+    <!-- Proceso de venta, paso 3: en el caso de que el comprador esté registrado, se procede a la venta de la mascota -->
+    <div *ngIf="!darAltaComprador && compradorYaRegistrado">
+        <button mat-raised-button color="primary" (click)="realizarVenta()">Vender mascota</button>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+
+<div class="centrado">
+    <h2>Modificación de usuario</h2>
+    <form class="formEditar" [formGroup]="usuarioEditarFormulario" (submit)="editarUsuario()">
+        <table>
+            <tr>
+                <td>
+                    <mat-form-field>
+                        <mat-label>Nombre (actual: {{usuarioEditar?.nombre}})</mat-label>
+                        <input matInput type="text" id="nombreUsuario" formControlName="nombreUsuario">
+                        <mat-error *ngIf="usuarioEditarFormulario?.get('nombreUsuario')?.hasError('required')">
+                            Nombre <strong>requerido</strong>
+                        </mat-error>
+                        <mat-error *ngIf="usuarioEditarFormulario?.get('nombreUsuario')?.hasError('pattern')">
+                            El nombre debe tener <strong>entre 1 y 255 caracteres</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+            &nbsp;      
+            <tr>
+                <td>
+                    <mat-form-field>
+                        <mat-label>Apellidos (actual: {{usuarioEditar?.apellidos}})</mat-label> 
+                        <input matInput type="text" id="apellidos" formControlName="apellidos">
+                        <mat-error *ngIf="usuarioEditarFormulario?.get('apellidos')?.hasError('required')">
+                            Apellidos <strong>requeridos</strong>
+                        </mat-error>
+                        <mat-error *ngIf="usuarioEditarFormulario?.get('apellidos')?.hasError('pattern')">
+                            El usuario debe tener <strong>entre 1 y 255 caracteres</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+            &nbsp;
+            <tr>
+                <td>
+                    <mat-form-field>
+                        <mat-label>Teléfono (actual: {{usuarioEditar?.telefono}})</mat-label>
+                        <input matInput type="text" id="telefono" formControlName="telefono">
+                        <mat-error *ngIf="usuarioEditarFormulario?.get('telefono')?.hasError('required')">
+                            Teléfono <strong>requerido</strong>
+                        </mat-error>
+                        <mat-error *ngIf="usuarioEditarFormulario?.get('telefono')?.hasError('pattern')">
+                            El teléfono debe tener <strong>9 dígitos</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+            &nbsp;
+            <tr>
+                <td>
+                    <mat-form-field>
+                        <mat-label>Usuario (actual: {{usuarioEditar?.username}})</mat-label>
+                        <input matInput type="text" id="usuario" formControlName="usuario">                    
+                        <mat-error *ngIf="usuarioEditarFormulario?.get('usuario')?.hasError('required')">
+                            Usuario <strong>requerido</strong>
+                        </mat-error>
+                        <mat-error *ngIf="usuarioEditarFormulario?.get('usuario')?.hasError('pattern')">
+                            El usuario debe tener <strong>6 caracteres</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+            &nbsp;
+            <tr>
+                <td>
+                    <mat-form-field>
+                        <mat-label>Contraseña (actual: {{usuarioEditar?.password}})</mat-label>    
+                        <input matInput type="password" id="contrasenia" formControlName="contrasenia">
+                        <mat-error *ngIf="usuarioEditarFormulario?.get('contrasenia')?.hasError('required')">
+                            Contraseña <strong>requerida</strong>
+                        </mat-error>
+                        <mat-error *ngIf="usuarioEditarFormulario?.get('contrasenia')?.hasError('pattern')">
+                            La contraseña debe tener <strong>entre 6 y 12 caracteres</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        &nbsp;
+        &nbsp;
+        &nbsp;    
+        <div>
+            <button mat-button color="accent" (click)="limpiarFormulario()">Limpiar</button>
+            <button mat-raised-button color="primary">Editar</button>
+        </div>
+    </form>
+</div>

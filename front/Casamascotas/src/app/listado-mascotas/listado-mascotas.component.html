@@ -1,0 +1,98 @@
+<div class="centrado">
+    <h2>Listado de mascotas</h2>
+    <div>
+        <h4>Filtrar por tipo de mascota</h4>
+        <select 
+            #elegirTipoMascota
+            (change)="cambiarListado(elegirTipoMascota.value)">
+            <option value="0">Selecciona una opción</option>
+            <option *ngFor="let tipoMascota of tiposMascotas" [value]>
+              {{ tipoMascota }}
+            </option>
+        </select>
+    </div>
+    &nbsp; 
+    <table mat-table [dataSource]="mascotas" class="mat-elevation-z8">
+        <!-- Columna ID -->
+        <ng-container matColumnDef="ID">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let mascota"> {{mascota.id}} </td>
+        </ng-container>
+
+        <!-- Columna Tipo -->
+        <ng-container matColumnDef="Tipo">
+            <th mat-header-cell *matHeaderCellDef> Tipo </th>
+            <td mat-cell *matCellDef="let mascota"> {{mascota.tipo}} </td>
+        </ng-container>
+
+        <!-- Columna Nombre -->
+        <ng-container matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let mascota"> {{mascota.nombre}} </td>
+        </ng-container>
+
+        <!-- Columna Precio -->
+        <ng-container matColumnDef="Precio">
+            <th mat-header-cell *matHeaderCellDef> Precio </th>
+            <td mat-cell *matCellDef="let mascota"> {{mascota.precio}}&nbsp;€</td>
+        </ng-container>
+
+        <!-- Botones para el rol administrador -->
+        <!-- Columna Editar -->
+        <ng-container matColumnDef="Editar">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let mascota">
+                <mat-icon *ngIf="usuarioLogado?.rol === 1" (click)="editarMascota(mascota?.id)">
+                    edit
+                </mat-icon>
+            </td>
+        </ng-container>
+
+        <!-- Columna Baja -->
+        <ng-container matColumnDef="Baja">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let mascota">
+                <mat-icon *ngIf="usuarioLogado?.rol === 1" (click)="bajaMascota(mascota?.id)">
+                    delete
+                </mat-icon>
+            </td>
+        </ng-container>
+
+        <!-- Botones para el rol usuario -->
+        <!-- Columna Vender -->
+        <ng-container matColumnDef="Vender">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let mascota">
+                <mat-icon *ngIf="usuarioLogado?.rol === 2" (click)="venderMascota(mascota?.id)">
+                    assignment_turned_in
+                </mat-icon>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnasMostradas"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnasMostradas;"></tr>
+    </table> 
+</div>
+
+
+<!-- <div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Tipo</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+        </tr>
+        <tr *ngFor="let mascota of mascotas">        
+            <td>{{mascota.id}}</td>
+            <td>{{mascota.tipo}}</td>
+            <td>{{mascota.nombre}}</td>
+            <td>{{mascota.precio}} €</td>
+            
+            <td><button *ngIf="usuarioLogado?.rol === 1" (click)="editarMascota(mascota?.id)">Editar mascota</button></td>        
+            <td><button *ngIf="usuarioLogado?.rol === 1" (click)="bajaMascota(mascota?.id)">Eliminar mascota</button></td>
+            
+            <td><button *ngIf="usuarioLogado?.rol === 2" (click)="venderMascota(mascota?.id)">Vender mascota</button></td>
+        </tr>
+    </table>
+    <div *ngIf="mascotas?.length === 0"><h4>No hay mascotas en venta de este tipo</h4></div>
+</div> -->

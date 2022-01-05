@@ -1,0 +1,23 @@
+<div style="text-align:center">
+    <app-form-login 
+        [titulo] = "title"
+        (userData) = "actualizarUser($event)">
+    </app-form-login>
+</div>
+<!-- Menús en función  del rol del usuario logado -->
+<div style="text-align:center">
+    <app-pantalla-admin
+        *ngIf="userData?.id !== 0 && userData?.rol === 1"
+        [logged] = "estaLogado"
+        [id] = "userData?.id"
+        [title] = "title">        
+    </app-pantalla-admin>
+    
+    <app-pantalla-usuario
+        *ngIf="userData?.id !== 0 && userData?.rol === 2"
+        [logged] = "estaLogado"
+        [id] = "userData?.id"
+        [title] = "title">        
+    </app-pantalla-usuario>
+</div>
+<router-outlet></router-outlet>

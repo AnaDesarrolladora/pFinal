@@ -1,0 +1,77 @@
+<!-- Esta parte se muestra cuando el usuario no está logado -->
+<div class="header">
+    <div class="headerNoLogado" *ngIf="!estaLogado">    
+        <form [formGroup]="usuarioFormulario" (submit)="iniciarSesion()">
+            <table>
+                <tr>
+                    <td><h1 class="titleApp">{{ titulo }}</h1></td>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <td>
+                        <mat-form-field>
+                            <mat-label>Usuario</mat-label>
+                            <input matInput type="text" id="usuario" formControlName="usuario">
+                            <mat-error *ngIf="usuarioFormulario?.get('usuario')?.hasError('required')">
+                                Usuario <strong>requerido</strong>
+                            </mat-error>
+                            <mat-error *ngIf="usuarioFormulario?.get('usuario')?.hasError('pattern')">
+                                El usuario debe tener <strong>6 caracteres</strong>
+                            </mat-error> 
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput type="password" id="contrasenia" formControlName="contrasenia">
+                            <mat-error *ngIf="usuarioFormulario?.get('contrasenia')?.hasError('required')">
+                                Contraseña <strong>requerida</strong>
+                            </mat-error>
+                            <mat-error *ngIf="usuarioFormulario?.get('contrasenia')?.hasError('pattern')">
+                                La contraseña debe tener <strong>entre 6 y 12 caracteres</strong>
+                            </mat-error> 
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <button mat-button color="accent" (click)="limpiarFormulario()">Limpiar</button>
+                        <button mat-raised-button color="primary">Enviar</button>
+                        &nbsp;
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <!-- Esta parte se muestra cuando el usuario está logado -->
+    <div *ngIf="estaLogado">
+        <table>
+            <tr>
+                <td>
+                    <h1 class="titleApp">
+                        {{ titulo }}
+                    </h1>
+                </td>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <td>
+                    <p>
+                       Usuario: {{ usuarioLogado?.nombre }} <strong>({{ rolUsuario(usuarioLogado?.rol) }})</strong>
+                    </p>
+                </td>
+                <td>
+                    <mat-icon color="warn" (click)="cerrarSesion()">close</mat-icon>
+                    <!-- <button mat-raised-button color="warn" (click)="cerrarSesion()">Cerrar sesión</button> -->
+                    &nbsp;
+                    &nbsp;
+                </td>    
+            </tr>
+        </table>
+    </div>
+    &nbsp;
+</div>
+
