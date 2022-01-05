@@ -1,0 +1,8 @@
+.centrado {
+    display: grid;
+}
+
+.formAlta,
+.formBusqueda {
+    display: contents;
+}
